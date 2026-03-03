@@ -1,0 +1,95 @@
+
+    disconnect_rez = parser.packet_parser(
+        # FIXED HEADER
+        "11100000 "  # DISCONNECT (type=14, flags=0)
+        "00011001 "  # remaining length = 25 !!!
+        # VARIABLE HEADER
+        "10000000 "  # disconnect reason code = 138
+        "00010111 "  # properties length = 23 !!!
+        "00011111 "  # reason string id (31) utf string
+        "00000000 00000010 " # reason msb si lsb
+        "01100100 01100100 "  # reason string propiu zis: "dd"
+        "00100110 "  # user property id (38) utf pair
+        "00000000 00000010 "  # user property key len (2 bytes)
+        "01100001 01100001 "  # user property key: "aa" (2 bytes)
+        "00000000 00000010 "  # user property value len (2 bytes)
+        "01100010 01100010 "  # user property value: "bb" (2 bytes)
+        "00011100 "  # server reference id (28) utf string
+        "00000000 00000110 "  # server reference msb si lsb
+        "01110011 01100101 01110010 01110110 01100101 01110010 "  # server reference propiu zis: "server"
+    )
+
+    pingreq_rez = parser.packet_parser(
+        # FIXED HEADER
+        "11000000 " # PINGREQ (type = 12)
+        "00000000 " # remaining length = 0
+    )
+
+    publish_rez = parser.packet_parser(
+        # FIXED HEADER
+        "00111101 " # PUBLISH (type = 3), flags = 1 10 1
+        "00001110 " # remaining length = var header + payload = 12 + 2 = 14
+        # VARIABLE HEADER
+        "00000000 00000011 " # topic name msb si lsb = 3
+        "01100001 00101111 01100010 " # topic name = "a/b"
+        "00000000 00001010 " # packet_id = 10
+        "00000100 " # properties length = 4
+        "00000011 "  # Content Type (3) (utf string)
+        "00000000 00000001 "  # Content Type msb si lsb = 1
+        "01110011 "  # Content Type = "s"
+        # PAYLOAD
+        "01110010 01100011"
+    )
+
+    subscribe_rez = Parser_and_handlers.parser.packet_parser(
+        # FIXED HEADER
+        "10000000 "  # SUBSCRIBE (type = 8)
+        "00011100 "  # rem length = 15(var header) + 13(payload) = 28
+        # VARIABLE HEADER
+        "00000000 00000010 "  # packet_id = 2
+        "00001100 "  # properties length = 12
+        "00001011 "  # Subscription Id (11)
+        "10000011 00000001 "  # subscription_id value = 3*128^0 + 1*128^1 = 131
+        "00100110 "  # User Property (38)
+        "00000000 00000010 "  # user property key len (2 bytes)
+        "01100001 01100001 "  # user property key: "aa" (2 bytes)
+        "00000000 00000010 "  # user property value len (2 bytes)
+        "01100010 01100010 "  # user property value: "bb" (2 bytes)
+        # PAYLOAD
+        "00000000 00000011 "  # topic 1 de lg 3
+        "01100001 00101111 01100010 "  # topic 1 = "a/b"
+        "00000001 "  # optiuni topic 1 -> qos = 1
+        "00000000 00000100 "  # topic 2 de lg 4
+        "01100001 00101111 01100010 01100010 "  # topic 2 = "a/bb"
+        "00000010 "  # optiuni topic 2 -> qos = 2
+    )
+
+    connect_rez = Parser_and_handlers.parser.packet_parser(
+        # FIXED HEADER
+        "00010000 "  # connect (type=1, flags=0)
+        "00111011 "  # remaining length = 16 + 43 = 59
+        # VARIABLE HEADER
+        "00000000 00000100 "  # protocol name length (4)
+        "01001101 01010001 01010100 01010100 "  # "MQTT"
+        "00000101 "  # protocol version (5)
+        "11110100 "  # user = 1; pass = 1; will retain = 1; will qos = 10 = 2; will flag = 1; clean start = 0; reserverd = 0;
+        "00000000 00001010 "  # keep alive (10)
+        "00000101 "  # properties length (5)
+        "00010001 "  # Session Expiry Interval identifier (17)
+        "00000000 00000000 00000000 00001010 "  # Session Expiry Interval (10)
+        # pana aici 16 bytes
+        # PAYLOAD
+        "00000000 00000110 "  # client ID length (6)
+        "01100011 01101100 01101001 01100101 01101110 01110100 "  # "client"
+        "00000101 "  # will properties length (5)
+        "00011000 "  # Will Delay Interval identifier (0x18 = 24)
+        "00000000 00000000 00000000 00001010 "  # Will Delay Interval = 10 (4 bytes)
+        "00000000 00000110 "  # will topic length (6)
+        "01110111 01101001 01101100 01101100 00101111 01110100 "  # "will/t"
+        "00000000 00000111 "  # will payload length (7)
+        "01110111 01101001 01101100 01101100 01001101 01110011 01100111 "  # "willMsg"
+        "00000000 00000100 "  # username length (4)
+        "01110101 01110011 01100101 01110010 "  # "user"
+        "00000000 00000100 "  # password length (4)
+        "01110000 01100001 01110011 01110011 "  # "pass" OK
+    )
