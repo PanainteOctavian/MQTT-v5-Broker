@@ -1,4 +1,4 @@
-# MQTT Protocol Documentation
+# MQTT Project
 
 ## Demo
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d62c7d4c-337c-4fc0-ba64-b73c138c8102" />
