@@ -1,7 +1,7 @@
 # MQTT Protocol Documentation
 
 ## Demo
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8789fbfa-47cc-4821-909e-212700232441" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d62c7d4c-337c-4fc0-ba64-b73c138c8102" />
 
 ## 1. Introduction
 MQTT (Message Queuing Telemetry Transport) is a lightweight messaging protocol based on the publish/subscribe architecture. It is specifically designed for devices with limited resources and high-latency networks. The protocol uses a binary message format to minimize overhead and ensure highly efficient communication.
